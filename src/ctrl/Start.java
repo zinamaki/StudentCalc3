@@ -62,6 +62,8 @@ public class Start extends HttpServlet {
 	private String interest;
 	private String period;
 
+	private boolean firstTime = true;
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -131,10 +133,12 @@ public class Start extends HttpServlet {
 				errorJSP();
 			}
 
-		}
-		 else {
-		 this.errorMessage = "found an error";
-		 errorJSP();
+		} else {
+			if(!firstTime){
+				 this.errorMessage = "found an error";
+				 errorJSP();
+			}
+			
 		 }
 
 	}	
@@ -175,10 +179,11 @@ public class Start extends HttpServlet {
 		if (submitParameter != null && submitParameter.equals("Submit")) {
 
 			if (error) {
-				System.out.println("Erro: Failed to submit due to invalid parameters");
+				System.out.println("Error: Failed to submit due to invalid parameters");
 				target = "/UI.jspx";
 			} else {
 				System.out.println("submitted");
+				firstTime = true;
 				target = "/Result.jspx";
 			}
 
@@ -223,6 +228,7 @@ public class Start extends HttpServlet {
 		calculatePayment(request);
 		updateJSP(request);
 		serveJSP(request, response);
+		firstTime = false;
 	}
 
 	/**
