@@ -26,7 +26,7 @@ public class Start extends HttpServlet {
 	private static final String GINTEREST = "graceInterest";
 	private static final String MPAYMENT = "monthlyPayment";
 	private static final String EMESSAGE = "errorMessage";
-	
+
 	private static final String PRINCIPAL = "principal";
 	private static final String INTEREST = "interest";
 	private static final String PERIOD = "period";
@@ -63,7 +63,7 @@ public class Start extends HttpServlet {
 	private String period;
 
 	private boolean firstTime = true;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -108,10 +108,10 @@ public class Start extends HttpServlet {
 		String input_interest = request.getParameter("inputInterest");
 		String input_period = request.getParameter("inputPeriod");
 
-		this.principal =input_principal;
+		this.principal = input_principal;
 		this.period = input_period;
 		this.interest = input_interest;
-		
+
 		this.error = validateInputisDouble(input_principal, input_interest, input_period);
 
 		if (!this.error) {
@@ -134,14 +134,14 @@ public class Start extends HttpServlet {
 			}
 
 		} else {
-			if(!firstTime){
-				 this.errorMessage = "found an error";
-				 errorJSP();
+			if (!firstTime) {
+				this.errorMessage = "found an error";
+				errorJSP();
 			}
-			
-		 }
 
-	}	
+		}
+
+	}
 
 	/*
 	 * This method check whether the three inputs from the form are doubles, if
@@ -177,16 +177,16 @@ public class Start extends HttpServlet {
 		String submitParameter = request.getParameter("submit");
 
 		String restartParameter = request.getParameter("restart");
-		
-		if(restartParameter != null && restartParameter.equals("Restart")){
+
+		if (restartParameter != null && restartParameter.equals("Restart")) {
 			firstTime = true;
 			System.out.println("Just hit restart");
 			this.errorMessage = "";
 			errorJSP();
-		}else if (submitParameter != null && submitParameter.equals("Submit")) {
-			
+		} else if (submitParameter != null && submitParameter.equals("Submit")) {
+
 			if (!error) {
-				
+
 				System.out.println("submitted");
 				target = "/Result.jspx";
 			}
@@ -194,7 +194,7 @@ public class Start extends HttpServlet {
 		} else {
 
 			System.out.println("first time");
-			//firstTime = true;
+			// firstTime = true;
 		}
 		request.getRequestDispatcher(target).forward(request, response);
 	}
@@ -215,7 +215,7 @@ public class Start extends HttpServlet {
 
 		this.getServletContext().setAttribute(MPAYMENT, this.monthlyPayment);
 		this.getServletContext().setAttribute(GINTEREST, this.graceInterest);
-		
+
 		this.getServletContext().setAttribute(PRINCIPAL, this.principal);
 		this.getServletContext().setAttribute(INTEREST, this.interest);
 		this.getServletContext().setAttribute(PERIOD, this.period);

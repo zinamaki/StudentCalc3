@@ -18,7 +18,7 @@ public class Loan {
 
 		if (grace) {
 			// if grace is enabled
-			graceInterest /= 100;
+			//graceInterest /= 100;
 			monthlyPayment += (graceInterest / gracePeriod);
 		}
 
