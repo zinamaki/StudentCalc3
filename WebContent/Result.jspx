@@ -23,7 +23,7 @@
 				<LABEL for="principal">Grace Interest:<f:formatNumber type="currency">${graceInterest}</f:formatNumber></LABEL> 
 				<LABEL
 					for="interest">Monthly Payment: <f:formatNumber type="currency">${monthlyPayment}</f:formatNumber></LABEL> <input
-					type="submit" name="submit" value="Restart"></input>
+					type="submit" name="restart" value="Restart"></input>
 			</fieldset>
 		</FORM>
 	</body></html>

@@ -173,24 +173,28 @@ public class Start extends HttpServlet {
 	private void serveJSP(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String target;
+		String target = "/UI.jspx";
 		String submitParameter = request.getParameter("submit");
 
-		if (submitParameter != null && submitParameter.equals("Submit")) {
-
-			if (error) {
-				System.out.println("Error: Failed to submit due to invalid parameters");
-				target = "/UI.jspx";
-			} else {
+		String restartParameter = request.getParameter("restart");
+		
+		if(restartParameter != null && restartParameter.equals("Restart")){
+			firstTime = true;
+			System.out.println("Just hit restart");
+			this.errorMessage = "";
+			errorJSP();
+		}else if (submitParameter != null && submitParameter.equals("Submit")) {
+			
+			if (!error) {
+				
 				System.out.println("submitted");
-				firstTime = true;
 				target = "/Result.jspx";
 			}
 
 		} else {
 
 			System.out.println("first time");
-			target = "/UI.jspx";
+			//firstTime = true;
 		}
 		request.getRequestDispatcher(target).forward(request, response);
 	}
